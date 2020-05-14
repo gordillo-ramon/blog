@@ -1,0 +1,38 @@
+since: '2020'
+homeFullContent: false
+rssFullContent: true
+logoTitle: Architecting the deconstruction
+keywords:
+  - IT Architecture
+  - Technology
+description: Ramon Gordillo's Blog
+dateFormatToUse: '2006-01-02'
+toc: true
+photoswipe: true
+contentCopyright: >-
+  <a rel="license noopener"
+  href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC
+  BY-NC-ND 4.0</a>
+customCSS: []
+customJS: []
+social:
+#  a-email: 'mailto:pepe@email.com'
+  b-stack-overflow: 'https://stackoverflow.com/users/1412097/ramon-gordillo'
+  c-twitter: 'https://twitter.com/gordillo_ramon'
+#  d-facebook: 'http://localhost:1313'
+  e-linkedin: 'www.linkedin.com/in/ramongordillo'
+#  f-google: 'http://localhost:1313'
+  g-github: 'http://localhost:1313'
+#  h-weibo: 'http://localhost:1313'
+#  i-zhihu: 'http://localhost:1313'
+#  j-douban: 'http://localhost:1313'
+#  k-pocket: 'http://localhost:1313'
+#  l-tumblr: 'http://localhost:1313'
+#  m-instagram: 'http://localhost:1313'
+#  n-gitlab: 'http://localhost:1313'
+#  o-goodreads: 'http://localhost:1313'
+#  p-coding: 'http://localhost:1313'
+#  q-bilibili: 'http://localhost:1313'
+#  r-codeforces: 'http://localhost:1313'
+#  s-mastodon: 'http://localhost:1313'
+

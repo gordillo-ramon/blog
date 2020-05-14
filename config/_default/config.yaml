@@ -1,13 +1,42 @@
-baseURL: "http://blog.ramon-gordillo.dev/"
-
-title: "Re-architecting the deconstruction"
-
-languageCode: "en-us"
-theme: "ananke" 
-
-permalinks:
-  posts: /:2006/:01/:02/:title/
-
+baseURL: 'http://localhost:1313/'
+title: Architecting the deconstruction
+enableRobotsTXT: true
+enableEmoji: true
+theme: jane
+hasCJKLanguage: true
+paginate: 3
+rssLimit: 20
+disqusShortname: ''
+googleAnalytics: ''
+copyright: ''
+defaultContentLanguage: en
+languages:
+  en:
+    languageCode: en
+author:
+  name: rgordill
+sitemap:
+  changefreq: weekly
+  priority: 0.5
+  filename: sitemap.xml
+menu:
+  main:
+    - name: Home
+      weight: 10
+      identifier: home
+      url: /
+    - name: Archives
+      weight: 20
+      identifier: archives
+      url: /post/
+    - name: Tags
+      weight: 30
+      identifier: tags
+      url: /tags/
+    - name: Categories
+      weight: 40
+      identifier: categories
+      url: /categories/
 markup:
   goldmark:
     renderer:
@@ -22,4 +51,4 @@ markup:
   tableOfContents:
     endLevel: 3
     ordered: false
-    startLevel: 2
+    startLevel: 1

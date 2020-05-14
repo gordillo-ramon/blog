@@ -1,7 +1,16 @@
 ---
 title: AWX on Kubernetes with ELK to create reports
 date: 2020-05-14
-draft: true
+tags: [
+    "kubernetes",
+    "awx",
+    "elasticsearch",
+    "kibana",
+    "sample",
+]
+categories: [
+    "Configuration",
+]
 ---
 
 I love Kubernetes and Ansible. Both are some of the [10 most popular Open Source projects in github in 2019](https://insights.dice.com/2019/11/08/10-popular-open-source-projects-github/). That is why I wanted to give it a try to deploy ansible awx in kubernetes, along with an ELK stack (Elasticsearch, Logstash and Kibana), to store playbook information and create some nice dashboards.
@@ -13,6 +22,8 @@ There are several ways to extract information from AWX. You can see some of them
 We are exploring the solid line path, where awx sends through the external logger to ELK.
 
 # Installation
+
+First, we need to set up all the pieces.
 
 ## Kubernetes
 
@@ -222,7 +233,7 @@ Step 2:
 
 Now, we are ready to play with the data. Remember to adapt the time window for the search to the one that is relevant. If the search gives no records, this is the first thing to check. An example query for the previous playbook run is shown in the following picture.
 
-![Kibana/Sample Query](/images/kibana_query.png)
+![Kibana/Sample Query](images/kibana_query.png)
 
 # Notes
 1. AWX has moved to a syslog omhttp buffer-based remote sender on https://github.com/ansible/awx/pull/6108. Before that PR, the implementation was a fire & forget direct http connection to logstash.
