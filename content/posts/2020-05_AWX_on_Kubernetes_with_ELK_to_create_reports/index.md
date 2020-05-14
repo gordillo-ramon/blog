@@ -8,7 +8,7 @@ I love Kubernetes and Ansible. Both are some of the [10 most popular Open Source
 
 There are several ways to extract information from AWX. You can see some of them if you prefer the ELK stack in the following picture.
 
-![Extracting informacion from AWX](/images/2020-05_AWX_on_Kubernetes_with_ELK_to_create_reports/extract_awx_data.svg)
+![Extracting informacion from AWX](images/extract_awx_data.svg)
 
 We are exploring the solid line path, where awx sends through the external logger to ELK.
 
@@ -189,7 +189,7 @@ Once the pod is ready, we can now configure awx to use the external logging.
 
 The configuration is fairly simple, and [described in the product version of awx, ansible tower](https://docs.ansible.com/ansible-tower/latest/html/administration/logging.html). We will setup the logstash service, host http[]()://logstash-logstash, port 8080. There are five different loggers, for this example I will select job_events which tracks tasks in a job. I will also check log system tracking facts individually, so if a task is executed on several hosts, we will receive a log per host and not an aggregated one.
 
-![AWX System/Settings: Logging](/images/2020-05_AWX_on_Kubernetes_with_ELK_to_create_reports/awx_logging.png)
+![AWX System/Settings: Logging](images/awx_logging.png)
 
 Click on test, and if everything is ok, you will receive a success, and then you can save the configuration.
 
@@ -201,11 +201,11 @@ AWX comes with a sample Hello World job template. For this demo, we will use it,
 
 Let's execute this sample playbook:
 
-![AWX Template/Lauch Demo Job](/images/2020-05_AWX_on_Kubernetes_with_ELK_to_create_reports/awx_launch_demo_job.png)
+![AWX Template/Lauch Demo Job](images/awx_launch_demo_job.png)
 
 When the run is complete, the output should be something like:
 
-![AWX Template/Demo Job](/images/2020-05_AWX_on_Kubernetes_with_ELK_to_create_reports/awx_demo_job.png)
+![AWX Template/Demo Job](images/awx_demo_job.png)
 
 ## See the results in Kibana
 
@@ -213,16 +213,16 @@ At this point, we have some data stored in elasticsearch with an auto created in
 
 Step 1:
 
-![Kibana/Create index/step 1](/images/2020-05_AWX_on_Kubernetes_with_ELK_to_create_reports/kibana_new_index1.png)
+![Kibana/Create index/step 1](images/kibana_new_index1.png)
 
 Step 2:
 
-![Kibana/Create index/step 2](/images/2020-05_AWX_on_Kubernetes_with_ELK_to_create_reports/kibana_new_index2.png)
+![Kibana/Create index/step 2](images/kibana_new_index2.png)
 
 
 Now, we are ready to play with the data. Remember to adapt the time window for the search to the one that is relevant. If the search gives no records, this is the first thing to check. An example query for the previous playbook run is shown in the following picture.
 
-![Kibana/Sample Query](/images/2020-05_AWX_on_Kubernetes_with_ELK_to_create_reports/kibana_query.png)
+![Kibana/Sample Query](/images/kibana_query.png)
 
 # Notes
 1. AWX has moved to a syslog omhttp buffer-based remote sender on https://github.com/ansible/awx/pull/6108. Before that PR, the implementation was a fire & forget direct http connection to logstash.

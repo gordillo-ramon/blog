@@ -5,8 +5,8 @@ title: "Re-architecting the deconstruction"
 languageCode: "en-us"
 theme: "ananke" 
 
-permalink:
-  posts: "/:2006/:01/:02/:title/"
+permalinks:
+  posts: /:2006/:01/:02/:title/
 
 markup:
   goldmark:
