@@ -1,4 +1,4 @@
-baseURL: 'http://localhost:1313/'
+baseURL: '/'
 title: Architecting the deconstruction
 enableRobotsTXT: true
 enableEmoji: true
