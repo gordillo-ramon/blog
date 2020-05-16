@@ -4,12 +4,14 @@ date: 2020-05-14
 tags: [
     "kubernetes",
     "awx",
+    "ansible",
     "elasticsearch",
     "kibana",
-    "sample",
 ]
 categories: [
-    "Configuration",
+    "awx",
+    "configuration",
+    "samples",
 ]
 ---
 

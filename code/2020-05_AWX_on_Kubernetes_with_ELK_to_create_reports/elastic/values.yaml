@@ -1,0 +1,23 @@
+replicas: 1
+minimumMasterNodes: 1
+
+esConfig:
+  elasticsearch.yml: |
+    node.store.allow_mmap: false
+
+volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  resources:
+    requests:
+      storage: 2Gi
+
+ingress:
+  enabled: true
+  annotations: 
+    kubernetes.io/ingress.class: nginx
+  path: /
+  hosts:
+    - elasticsearch.minikube.cloud
+
+sysctlInitContainer:
+  enabled: false

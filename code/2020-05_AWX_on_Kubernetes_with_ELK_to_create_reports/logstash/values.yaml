@@ -1,0 +1,29 @@
+logstashConfig: 
+  logstash.yml: |
+    http.host: 0.0.0.0
+    xpack.monitoring.enabled: false
+
+logstashPipeline: 
+  logstash.conf: |
+    input {
+      http {}
+    }
+    filter {
+      json {
+        source => "message"
+      }
+    }
+    output { 
+      elasticsearch { 
+        hosts => ["http://elasticsearch-master:9200"] 
+        index => "awx" 
+      } 
+    }
+
+service: 
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
