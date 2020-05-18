@@ -1,4 +1,4 @@
-baseURL: 'http://blog.ramon-gordillo.dev/'
+baseURL: 'https://blog.ramon-gordillo.dev/'
 title: Architecting the deconstruction
 enableRobotsTXT: true
 enableEmoji: true
