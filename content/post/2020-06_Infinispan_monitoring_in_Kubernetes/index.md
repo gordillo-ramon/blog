@@ -181,7 +181,7 @@ Or you can go to http://infinispan-minimal.minikube.cloud/console/, and with the
 
 ## Creating a Cache and adding some data
 
-After deploying the cluster, infinispan has no caches configured (but some internal ones, defined with `__name__`). We are creating a sample cache named "fruit", with the following configuration in [default.json](code/data/default.json).
+After deploying the cluster, infinispan has no caches configured (but some internal ones, defined with `__name__`). We are creating a sample cache named "fruit", with the following configuration in [default.json](code/data/default-distributed.json).
 
 ```json
 {
@@ -367,12 +367,12 @@ To deploy Grafana on kubernetes cluster, we will use the official helm charts fr
 helm install infinispan-grafana grafana -f values.yaml --repo https://kubernetes-charts.storage.googleapis.com 
 ```
 
-With this values, you get the prometheus datasource already configured. You may create your own dashboard, or just import this two samples that I created, a [General](code/grafana/Infinispan-11-General.json) and a [Detailed](code/grafana) templated for a cache.
+With this values, you get the prometheus datasource already configured. You may create your own dashboard, or just import this two samples that I created, a [General](code/grafana/Infinispan-11-General.json) and a [Detailed](code/grafana/Infinispan-11-CacheStatistics.json) templated for a cache.
 
 The General dashboard with this setup can be something like the following picture.
 
-
+![Grafana Dashboard: General](images/grafana_dashboard.png)
 
 ## Code
 
-All the code used in this post can be downloaded at [this github repo](https://github.com/gordillo-ramon/blog/tree/master/content/2020-06_Infinispan_monitoring_in_Kubernetes/code).
+All the code used in this post can be downloaded at [this github repo](https://github.com/gordillo-ramon/blog/tree/master/content/post/2020-06_Infinispan_monitoring_in_Kubernetes/code).
