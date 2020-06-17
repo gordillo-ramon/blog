@@ -1,0 +1,21 @@
+# To get the json configuration from xml
+curl -X POST -u developer:dIRs5cAAsHIeeRIL /rest/v2/caches?action=toJSON  --data-binary "@"
+
+# Query cache names configured
+curl -X GET -u developer:dIRs5cAAsHIeeRIL -H "Content-Type: application/json" http://infinispan-minimal.minikube.cloud/rest/v2/caches/
+
+# Create a new cache called "fruits"
+curl -X POST -u developer:dIRs5cAAsHIeeRIL -H "Content-Type: application/json" http://infinispan-minimal.minikube.cloud/rest/v2/caches/fruits --data-binary "@default.json"
+
+# Query cache fruit configuration
+curl -X GET -u developer:dIRs5cAAsHIeeRIL -H "Content-Type: application/json" http://infinispan-minimal.minikube.cloud/rest/v2/caches/fruits
+
+# Generate entry
+curl -X POST -u developer:dIRs5cAAsHIeeRIL -H "Content-Type: application/json" http://infinispan-minimal.minikube.cloud/rest/v2/caches/fruits/0 --data '{ "banana": 5 }'
+
+# Generate 1000 random entry
+for i in {1..1000}; do curl -X POST -u developer:dIRs5cAAsHIeeRIL -H "Content-Type: application/json" http://infinispan-minimal.minikube.cloud/rest/v2/caches/fruits/$i --data '{ "banana": '$RANDOM' }'; done
+
+# Generate 1000 random entry > 2kb
+for i in {1..1000}; do curl -X POST -u developer:dIRs5cAAsHIeeRIL -H "Content-Type: application/json" http://infinispan-minimal.minikube.cloud/rest/v2/caches/fruits/$i --data @sample.json; done
+

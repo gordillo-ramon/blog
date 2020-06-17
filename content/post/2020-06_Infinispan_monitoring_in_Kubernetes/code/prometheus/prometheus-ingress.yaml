@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: prometheus
+  namespace: operators
+  annotations: 
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: prometheus.minikube.cloud
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: prometheus-operated
+              servicePort: web

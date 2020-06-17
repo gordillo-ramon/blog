@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: infinispan
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: operatorgroup
+  namespace: infinispan
+spec:
+  targetNamespaces:
+  - infinispan
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: infinispan
+  namespace: infinispan
+spec:
+  channel: dev-preview
+  name: infinispan
+  source: operatorhubio-catalog
+  sourceNamespace: olm

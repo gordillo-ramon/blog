@@ -1,0 +1,36 @@
+apiVersion: v1
+stringData:
+  username: developer 
+  password: dIRs5cAAsHIeeRIL 
+kind: Secret
+metadata:
+  name: prom-infinispan-basic-auth
+  namespace: operators
+type: Opaque
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    k8s-app: prometheus
+  name: infinispan-monitoring
+  namespace: operators
+spec:
+  endpoints:
+    - basicAuth:
+        password:
+          key: password
+          name: prom-infinispan-basic-auth
+        username:
+          key: username
+          name: prom-infinispan-basic-auth
+      interval: 30s
+      scheme: http
+      targetPort: 11222
+  namespaceSelector:
+    matchNames:
+      - infinispan
+  selector:
+    matchLabels:
+      app: infinispan-service
+      clusterName: infinispan-minimal

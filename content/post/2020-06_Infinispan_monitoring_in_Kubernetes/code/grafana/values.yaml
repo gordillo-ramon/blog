@@ -1,0 +1,43 @@
+image:
+  repository: grafana/grafana
+  tag: 7.0.0
+
+testFramework:
+  enabled: false
+
+downloadDashboardsImage: {}
+
+downloadDashboards: {}
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  path: /
+  hosts:
+    - grafana.minikube.cloud
+
+persistence:
+  type: pvc
+  enabled: true
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+  finalizers: {}
+
+adminUser: admin
+adminPassword: admin
+
+datasources: 
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: prometheus-infinispan
+      type: prometheus
+      access: proxy
+      url: http://prometheus-operated.operators.svc:9090
+      withCredentials: false
+      isDefault: true
+
+namespaceOverride: "infinispan"
