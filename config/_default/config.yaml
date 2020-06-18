@@ -15,6 +15,8 @@ languages:
     languageCode: en
 author:
   name: rgordill
+permalinks:
+  post: /:year/:month/:title/
 sitemap:
   changefreq: weekly
   priority: 0.5
