@@ -47,7 +47,7 @@ curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releas
 
 Or just execute `minikube addons enable olm`.
 
-## Deploying an Infinipan Cluster
+## Deploying the Infinipan Operator
 
 We are using the kubernetes operator. To deploy it, just create an [infinispan-operator.yaml](code/infinispan/infinispan-operator.yaml) with the following content (from now on, replace infinispan namespace if any other is selected for this test).
 
@@ -78,7 +78,7 @@ spec:
   sourceNamespace: olm
 ```
 
-## Deploying a cluster using the operator
+## Deploying an Infinispan Cluster using the operator
 
 The process described here is based on the official documentation for deploying the operator: [infinispan operator documentation](https://infinispan.org/infinispan-operator/master/operator.html). If anything else is needed, refer to that documentation as a reference.
 
@@ -233,7 +233,7 @@ And query the API or just go to the console and see if this entry is there.
 
 ![Infinispan Console: Key](images/infinispan_key.png)
 
-## Prometheus Server
+## Adding Prometheus Server using the operator
 
 There are different alternatives to deploy and configure a prometheus server and its rules to scrape the targets. I am selecting to use the coreos operator, as it can be used with olm as I did previously with infinispan.
 
@@ -359,7 +359,7 @@ And then, you can try and query a metric from the new cache.
 
 ![Prometheus Console: query](images/prometheus_query.png)
 
-## Grafana
+## Deploying Grafana
 
 To deploy Grafana on kubernetes cluster, we will use the official helm charts from. We can add the repo to helm, or just use the remote bundle. We are using a [values.yaml](code/grafana/values.yaml)
 
