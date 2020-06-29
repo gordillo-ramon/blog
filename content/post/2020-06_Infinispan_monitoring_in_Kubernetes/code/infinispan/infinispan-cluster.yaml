@@ -3,8 +3,13 @@ kind: Secret
 metadata:
   name: infinispan-basic-auth
   namespace: infinispan
-data:
-  identities.yaml: Y3JlZGVudGlhbHM6Ci0gdXNlcm5hbWU6IGRldmVsb3BlcgogIHBhc3N3b3JkOiBkSVJzNWNBQXNISWVlUklMCi0gdXNlcm5hbWU6IG9wZXJhdG9yCiAgcGFzc3dvcmQ6IHVNQm85Q21FZEVkdVlrMjQK
+stringData:
+  identities.yaml: |- 
+    credentials:
+    - username: developer
+      password: dIRs5cAAsHIeeRIL
+    - username: operator
+      password: uMBo9CmEdEduYk24
 ---
 apiVersion: infinispan.org/v1
 kind: Infinispan
