@@ -94,13 +94,7 @@ credentials:
   password: uMBo9CmEdEduYk24
 ```
 
-Once this file is created, we need to encode in base 64.
-
-```bash
-cat identities.yaml | base64 -w 0
-```
-
-And then, we can create the secret with these credentials, and the infinispan Custom Resource (CR) instance to create the cluster. Create a file called [infinispan-cluster.yaml](code/infinispan/infinispan-cluster.yaml).
+We can encode in base64 this file and pass it as `data` or just add it as is in `stringData` and then, we can create the infinispan Custom Resource (CR) instance to create the cluster. Create a file called [infinispan-cluster.yaml](code/infinispan/infinispan-cluster.yaml).
 
 ```yml
 apiVersion: v1
@@ -108,8 +102,13 @@ kind: Secret
 metadata:
   name: infinispan-basic-auth
   namespace: infinispan
-data:
-  identities.yaml: Y3JlZGVudGlhbHM6Ci0gdXNlcm5hbWU6IGRldmVsb3BlcgogIHBhc3N3b3JkOiBkSVJzNWNBQXNISWVlUklMCi0gdXNlcm5hbWU6IG9wZXJhdG9yCiAgcGFzc3dvcmQ6IHVNQm85Q21FZEVkdVlrMjQK
+stringData:
+  identities.yaml: |- 
+    credentials:
+    - username: developer
+      password: dIRs5cAAsHIeeRIL
+    - username: operator
+      password: uMBo9CmEdEduYk24
 ---
 apiVersion: infinispan.org/v1
 kind: Infinispan
