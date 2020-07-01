@@ -72,7 +72,7 @@ metadata:
   name: infinispan
   namespace: infinispan
 spec:
-  channel: dev-preview
+  channel: stable
   name: infinispan
   source: operatorhubio-catalog
   sourceNamespace: olm
