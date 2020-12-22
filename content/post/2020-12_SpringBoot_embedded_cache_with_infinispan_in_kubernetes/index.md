@@ -14,7 +14,7 @@ categories: [
 ]
 ---
 
-Springboot is extensively used for microservice architectures, most of them running in kubernetes. Spring Cache has been defined as an abstraction layer for cache servers, although there are other alternatives (JSR-107 JCache was one of the initial ones).
+Spring Boot is extensively used for microservice architectures, most of them running in kubernetes. Spring Cache has been defined as an abstraction layer for cache servers, although there are other alternatives (JSR-107 JCache was one of the initial ones).
 
 When using a cache, there are two alternatives, embedded in the microservice or external to it. Both has its benefits and drawbacks and depending on the use case one is prefered to the other.
 
@@ -31,13 +31,13 @@ As a brief summary, the libraries I will use are:
 
 All of them are pretty simple to add to your project, and provide automatically useful features to make your microservice as simple as possible.
 
-Although I am copying some code snippets here to explain the process, if you want to give it a try by yourself I recommend cloning [the repo]().
+Although I am copying some code snippets here to explain the process, if you want to give it a try by yourself I recommend cloning [the repo](https://github.com/rgordill/customer-service-cache/tree/blog_v1).
 
 ## Developing the microservice
 
-## Maven file
+### Maven file
 For this example, I will use maven, but the same can be implemented with graddle.
-These are the artifacts that should be added in [pom.xml]() for start developing the code:
+These are the artifacts that should be added in [pom.xml](https://github.com/rgordill/customer-service-cache/blob/blog_v1/pom.xml) for start developing the code:
 
 - org.infinispan:**infinispan-spring-boot-starter-embedded**: this should be the first one to avoid spring boot bringing its own dependency versions (which are not correlated with the starter)
 - org.springframework.boot:**spring-boot-starter-web**: Main Spring Boot framework
@@ -49,7 +49,7 @@ These are the artifacts that should be added in [pom.xml]() for start developing
 
 
 ### POJO
-First, we should define the java object to serialize. I will use lombok annotations to create the setters/getters, and spring-docs for giving some context to the OpenAPI auto generated documentation [Customer.java]().
+First, we should define the java object to serialize. I will use lombok annotations to create the setters/getters, and spring-docs for giving some context to the OpenAPI auto generated documentation [Customer.java](https://github.com/rgordill/customer-service-cache/blob/blog_v1/src/main/java/org/sample/Customer.java).
 
 ```java
 @Getter @Setter @NoArgsConstructor 
@@ -77,7 +77,7 @@ public class Customer implements Serializable {
 ```
 
 ### Spring Cache Repository
-A simple repository can be created with the following code [CustomerRepositorySpringCache.java]():
+A simple repository can be created with the following code [CustomerRepositorySpringCache.java](https://github.com/rgordill/customer-service-cache/blob/blog_v1/src/main/java/org/sample/CustomerRepositorySpringCache.java):
 
 ```java
 @Repository
@@ -105,7 +105,7 @@ It selects the spring-cache qualifier to be implemented. You can use also JCache
 I may have configured the cache name ("customers") to come from application.properties, but I have prefered to keep it simple, as the name of the object was already selected.
 
 ### Rest Controller
-The last part is implementing a REST spring controller. I am only showing in this snippet the PUT method, all the code is in [CustomerController.java]() 
+The last part is implementing a REST spring controller. I am only showing in this snippet the PUT method, all the code is in [CustomerController.java](https://github.com/rgordill/customer-service-cache/blob/blog_v1/src/main/java/org/sample/CustomerRepositorySpringCache.java) 
 ```java
     @RequestMapping(method=RequestMethod.PUT,value="/customer")
     @Operation(
@@ -124,7 +124,7 @@ The last part is implementing a REST spring controller. I am only showing in thi
 Each method is annotated with REST mappings and spring-docs annotations to expose the OpenAPI with more details.
 
 ### Launcher
-You only need to add a Spring Boot application class like [CustomerServiceCacheApplication.java](). 
+You only need to add a Spring Boot application class like [CustomerServiceCacheApplication.java](https://github.com/rgordill/customer-service-cache/blob/blog_v1/src/main/java/org/sample/CustomerServiceCacheApplication.java). 
 
 ```java
 @SpringBootApplication
