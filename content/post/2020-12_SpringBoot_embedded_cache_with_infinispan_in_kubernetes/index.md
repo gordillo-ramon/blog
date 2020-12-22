@@ -208,8 +208,9 @@ Good, everything works fine. The final test is using the OpenAPI UI or sending d
 
 ## Kubernetes and multiples instances
 
-
 Now we are starting the interesting things. We will use jkube to build the image and create all the artifacts needed (configMap, deployment, services, ingress, roles and rolebindings).
+
+The library jkube is a maven plugin that automates the creation of those artifacts. It has two alternatives, adding XML configuration in your pom.xml related with the plugin, or adding yaml fragments (with substitution properties) on a jkube folder inside your resources. I did it both for an example, I think a common java developer will be more comfortable with the XML part, but if you need the most flexible way (for example, creating the role/rolebinding suggested below), yaml fragments will be your choice. Look at the [docs](https://www.eclipse.org/jkube/docs) for more information.
 
 For building the image, I will use the [jkube binary java image](https://github.com/jkubeio/jkube-images#jkube-java-binary-s2i), but if you prefer to use buildpacks, you may comment on [this issue](https://github.com/eclipse/jkube/issues/439) to give your ideas.
 
