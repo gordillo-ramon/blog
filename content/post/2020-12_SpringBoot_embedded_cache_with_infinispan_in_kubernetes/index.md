@@ -14,9 +14,6 @@ categories: [
 ]
 ---
 
-# Spring Boot embedded cache with Infinispan in Kubernetes
-
-## Motivation
 Springboot is extensively used for microservice architectures, most of them running in kubernetes. Spring Cache has been defined as an abstraction layer for cache servers, although there are other alternatives (JSR-107 JCache was one of the initial ones).
 
 When using a cache, there are two alternatives, embedded in the microservice or external to it. Both has its benefits and drawbacks and depending on the use case one is prefered to the other.

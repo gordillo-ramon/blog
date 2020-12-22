@@ -1,5 +1,5 @@
 ---
-title: Infinispan monitoring in Kubernetes
+title: Infinispan monitoring in Kubernetes with Prometheus and Grafana
 date: '2020-06-17'
 tags: [
     "kubernetes",
@@ -12,8 +12,6 @@ categories: [
     "monitoring",
 ]
 ---
-
-# Infinispan monitoring in Kubernetes with Prometheus and Grafana
 
 [Infinispan](https://infinispan.org/) is a java based open source cache and grid solution, that is used extensively in different framework like j2ee, springboot and quarkus among others. It is compatible with different java caching models, like JSR-107 and spring data.
 
