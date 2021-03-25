@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-application-example
+spec:
+  destination:
+    name: in-cluster
+    namespace: demo
+  project: example
+  source:
+    path: <your-git-path>
+    repoURL: <your-public-git-repo>
+  syncPolicy:
+    automated:
+      selfHeal: true
