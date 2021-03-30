@@ -17,7 +17,9 @@ Last month I was picking my brain about GitOps and how this model fits with othe
 
 I discarded some cloud-only solutions like aws-secret-operator, and also some that only covers one deployment type like helm secrets or kustomize secret generator plugins. Looking for help, my colleague [Mario Vazquez](https://github.com/mvazquezc) suggested that it would be better if we can even avoid storing encrypted secrets in the repo and allow us to distribute different credentials for the vault in different clusters. So I decided to go in my first try for [Hashicorp Vault](https://www.vaultproject.io/) and use their open source version that can be deployed in kubernetes too.
 
-The easier way to integrate a new feature like secret injection in ArgoCD is through plugins. [This project](https://github.com/IBM/argocd-vault-plugin) can be used for this purpose, so it will be the base for our integration.
+The easier way to integrate a new feature like secret injection in ArgoCD is through plugins. [This project](https://github.com/IBM/argocd-vault-plugin) can be used for this purpose, so it will be the base for our integration. This simple diagram will show what we are going to deploy.
+
+![First Architecture](images/architecture-1.png)
 
 # Deployment and Configuration
 
@@ -392,4 +394,8 @@ stringData:
 
 # Conclusion
 
-Storing sensitive data in git repos is not a valid choice in almost any deployments. Depending on the level of trust of your kubernetes infrastructure, you can set up the secret management at gitops sync time like the one we have shown in this post, or use the integration with the vault at runtime. 
+Storing sensitive data in git repos is not a valid choice in almost any deployments. Depending on the level of trust of your kubernetes infrastructure, you can set up the secret management at gitops sync time like the one we have shown in this post, or use the integration with the vault at runtime.
+
+This second option will be implemented by a kubernetes [vault injector](https://www.vaultproject.io/docs/platform/k8s/injector). It eliminates the need for the ArgoCD integration, but introduces the vault as a SPoF for the applications that requires secrets. This diagram shows this alternative.
+
+![Second Architecture](images/architecture-2.png)
