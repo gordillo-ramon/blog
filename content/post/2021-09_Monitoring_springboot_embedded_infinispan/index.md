@@ -63,3 +63,5 @@ Second one is about cache statistics: when cache was started and when statistics
 And last one is related to performance in the caches. Memory usage and time that takes to do operations in the cache are shown.
 
 ![Performance Panel](images/panel3.png)
+
+As you can see, after first put that warms the microservice, average put time is very low, but the more impressive one is get time, that takes less than a millisecond and so it cannot even be seen.
