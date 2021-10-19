@@ -1,6 +1,6 @@
 ---
 title: Benchmarking Apache Kafka, Kubernetes revisited (with Ceph)
-date: 2021-18-10
+date: '2021-10-18'
 tags: [
     "kubernetes",
     "kafka",
