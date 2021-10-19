@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: consumer
+spec:
+  completions: 16
+  parallelism: 16
+  backoffLimit: 4
+  template:
+    spec:
+      containers:
+      - name: producer
+        image: quay.io/strimzi/kafka:0.25.0-kafka-2.8.0
+        command:
+        - /opt/kafka/bin/kafka-consumer-perf-test.sh
+        - --topic 
+        - test
+        - --messages
+        - '50000000' 
+        - --bootstrap-server
+        - strimzi-cluster-kafka-bootstrap:9092 
+      restartPolicy: Never
