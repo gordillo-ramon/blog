@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: demo
+  labels:
+    app: demo-app
+spec:
+  selector:
+    matchLabels:
+      ActiveMQArtemis: demo
+  endpoints:
+  - path: /metrics
+    port: console-jolokia

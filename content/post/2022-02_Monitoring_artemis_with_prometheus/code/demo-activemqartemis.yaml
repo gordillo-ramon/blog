@@ -1,0 +1,34 @@
+apiVersion: broker.amq.io/v2alpha5
+kind: ActiveMQArtemis
+metadata:
+  name: demo
+spec:
+  version: 7.9.1
+  upgrades:
+    enabled: true
+  console:
+    expose: true
+  deploymentPlan:
+    enableMetricsPlugin: true
+    size: 2
+    image: placeholder
+    requireLogin: false
+    persistenceEnabled: true
+    journalType: nio
+    messageMigration: true
+    resources:
+        limits:
+            cpu: "1"
+            memory: "2048M"
+        requests:
+            cpu: "500m"
+            memory: "1024M"
+  acceptors:
+  - name: amqp
+    port: 5672
+    protocols: amqp
+  - name: mqtt
+    port: 1883
+    protocols: mqtt
+
+
