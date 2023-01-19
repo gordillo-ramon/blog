@@ -16,9 +16,9 @@ contentCopyright: >-
 customCSS: []
 customJS: []
 social:
-#  a-email: 'mailto:pepe@email.com'
+  a-email: 'mailto:ramon.gordillo@redhat.com'
   b-stack-overflow: 'https://stackoverflow.com/users/1412097/ramon-gordillo'
-  c-twitter: 'https://twitter.com/gordillo_ramon'
+#  c-twitter: 'https://twitter.com/gordillo_ramon'
 #  d-facebook: 'http://localhost:1313'
   e-linkedin: 'https://www.linkedin.com/in/ramongordillo'
 #  f-google: 'http://localhost:1313'
