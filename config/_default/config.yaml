@@ -5,7 +5,8 @@ enableEmoji: true
 theme: jane
 hasCJKLanguage: true
 paginate: 3
-rssLimit: 20
+disableKinds: 
+- "RSS"
 disqusShortname: ''
 googleAnalytics: ''
 copyright: ''

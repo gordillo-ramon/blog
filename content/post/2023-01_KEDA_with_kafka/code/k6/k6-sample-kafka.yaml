@@ -1,0 +1,23 @@
+apiVersion: k6.io/v1alpha1
+kind: K6
+metadata:
+  name: k6-sample-with-extensions
+  namespace: k6-tests
+spec:
+  parallelism: 1
+  script:
+    configMap:
+      name: kafka-keda-1
+      file: test.js
+  arguments: -o output-prometheus-remote --include-system-env-vars
+  runner:
+    image: quay.io/rgordill/k6-kafka:v0.16.0
+    imagePullPolicy: IfNotPresent
+    env:
+      - name: K6_PROMETHEUS_RW_REMOTE_URL
+        value: http://prometheus-operated.prometheus-extra.svc:9090/api/v1/write
+      - name: KAFKA_BOOTSTRAP
+        value: strimzi-cluster-kafka-bootstrap.strimzi.svc:9092
+      - name: TOPIC
+        value: test
+

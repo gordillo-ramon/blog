@@ -1,0 +1,96 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-keda-1
+  namespace: k6-tests
+data:
+  test.js: |
+    import { check, sleep } from 'k6';
+    import { Writer, Connection, SchemaRegistry, SCHEMA_TYPE_STRING } from 'k6/x/kafka';
+    import { Rate } from 'k6/metrics';
+
+    const bootstrapServers = [`${__ENV.KAFKA_BOOTSTRAP}`];
+    const kafkaTopic = `${__ENV.TOPIC}`;
+
+    console.log('bootstrapServers:', bootstrapServers, ', kafkaTopic', kafkaTopic);
+
+    const connection = new Connection({
+        address: bootstrapServers[0],
+    });
+
+    // const topics = connection.listTopics();
+    // console.log("Topics: ", topics);
+
+    const schemaRegistry = new SchemaRegistry();
+
+    const writer = new Writer({
+      brokers: bootstrapServers, 
+      topic: kafkaTopic,
+    });
+
+    export const options = {
+      scenarios: {
+        start_1: {
+          executor: 'constant-arrival-rate',
+          rate: 1, // 1 RPS, since timeUnit is the default 1s
+          timeUnit: '1s',
+          duration: '1m',
+          preAllocatedVUs: 1,
+          maxVUs: 5,
+        },
+        ramp_1: {
+          executor: 'ramping-arrival-rate',
+          startTime: '1m',
+          startRate: 1,
+          timeUnit: '1s',
+          preAllocatedVUs: 1,
+          maxVUs: 5,
+          stages: [
+            { target: 5, duration: '30s' },
+            { target: 1, duration: '30s' },
+          ],
+        },
+        end_1: {
+          executor: 'constant-arrival-rate',
+          startTime: '2m',
+          rate: 1, 
+          timeUnit: '1s',
+          duration: '1m',
+          preAllocatedVUs: 1,
+          maxVUs: 5,
+        },
+      },
+    };
+
+    export default function () {
+
+      const error = writer.produce({
+        messages: [
+          {
+            key: schemaRegistry.serialize({
+              data: "test-key-string",
+              schemaType: SCHEMA_TYPE_STRING,
+            }),
+            value: schemaRegistry.serialize({
+              data: "test-value-string",
+              schemaType: SCHEMA_TYPE_STRING,
+            }),
+            headers: {
+              mykey: "myvalue",
+            },
+          },
+        ],
+      });
+
+      check(error, {
+        'is sent': (err) => err == undefined,
+      });
+    }
+
+    export function teardown(data) {
+      writer.close();
+    }
+
+
+

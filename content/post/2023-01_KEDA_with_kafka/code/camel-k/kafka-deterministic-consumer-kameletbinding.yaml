@@ -1,0 +1,30 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: kafka-deterministic-consumer
+  namespace: strimzi
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: kafka-source
+    properties:
+      bootstrapServers: strimzi-cluster-kafka-bootstrap.strimzi.svc:9092
+      topic: test
+      user: nobody
+      password: passw0rd
+      consumerGroup: lag-consumer-test
+      securityProtocol: PLAINTEXT
+  steps:
+    - ref:
+        kind: Kamelet
+        apiVersion: camel.apache.org/v1alpha1
+        name: throttle-action
+      properties:
+        messages: "1"
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: log-sink
