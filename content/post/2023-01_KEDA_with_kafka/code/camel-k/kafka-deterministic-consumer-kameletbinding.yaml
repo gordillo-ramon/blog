@@ -2,7 +2,6 @@ apiVersion: camel.apache.org/v1alpha1
 kind: KameletBinding
 metadata:
   name: kafka-deterministic-consumer
-  namespace: strimzi
 spec:
   source:
     ref:

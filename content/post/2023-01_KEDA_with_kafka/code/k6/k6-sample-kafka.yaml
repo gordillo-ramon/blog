@@ -14,7 +14,7 @@ spec:
     image: quay.io/rgordill/k6-kafka:v0.16.0
     imagePullPolicy: IfNotPresent
     env:
-      - name: K6_PROMETHEUS_RW_REMOTE_URL
+      - name: K6_PROMETHEUS_RW_SERVER_URL
         value: http://prometheus-operated.prometheus-extra.svc:9090/api/v1/write
       - name: KAFKA_BOOTSTRAP
         value: strimzi-cluster-kafka-bootstrap.strimzi.svc:9092
