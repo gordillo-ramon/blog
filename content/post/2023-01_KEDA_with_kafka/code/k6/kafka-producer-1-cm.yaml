@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kafka-keda-1
+  name: kafka-producer-1
   namespace: k6-tests
 data:
   test.js: |
@@ -35,45 +35,45 @@ data:
           executor: 'constant-arrival-rate',
           rate: 1, // 1 RPS, since timeUnit is the default 1s
           timeUnit: '1s',
-          duration: '1m',
+          duration: '2m',
           preAllocatedVUs: 1,
-          maxVUs: 5,
         },
         ramp_1: {
           executor: 'ramping-arrival-rate',
-          startTime: '1m',
+          startTime: '2m',
           startRate: 1,
           timeUnit: '1s',
           preAllocatedVUs: 1,
-          maxVUs: 5,
+          maxVUs: 6,
           stages: [
-            { target: 5, duration: '30s' },
-            { target: 1, duration: '30s' },
+            { target: 6, duration: '1m' },
+            { target: 6, duration: '5m' },
+            { target: 1, duration: '1m' },
           ],
         },
         end_1: {
           executor: 'constant-arrival-rate',
-          startTime: '2m',
+          startTime: '8m',
           rate: 1, 
           timeUnit: '1s',
-          duration: '1m',
+          duration: '2m',
           preAllocatedVUs: 1,
-          maxVUs: 5,
         },
       },
     };
 
     export default function () {
 
+      const d = new Date();
       const error = writer.produce({
         messages: [
           {
             key: schemaRegistry.serialize({
-              data: "test-key-string",
+              data: "test-key-string-"+d.toISOString(),
               schemaType: SCHEMA_TYPE_STRING,
             }),
             value: schemaRegistry.serialize({
-              data: "test-value-string",
+              data: "test-value-string-"+d.toISOString(),
               schemaType: SCHEMA_TYPE_STRING,
             }),
             headers: {
@@ -91,6 +91,3 @@ data:
     export function teardown(data) {
       writer.close();
     }
-
-
-

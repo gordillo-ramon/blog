@@ -7,7 +7,7 @@ spec:
   parallelism: 1
   script:
     configMap:
-      name: kafka-keda-1
+      name: kafka-producer-1
       file: test.js
   arguments: -o output-prometheus-remote --include-system-env-vars
   runner:
