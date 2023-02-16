@@ -65,7 +65,7 @@ I need to include the kafka exporter in the strimzi cluster CR, so metrics in pr
 
 The files I am using come from the original repo, the [cluster example with metrics](https://github.com/strimzi/strimzi-kafka-operator/blob/main/examples/metrics/kafka-metrics.yaml) and the [PodMonitor](https://github.com/strimzi/strimzi-kafka-operator/blob/main/examples/metrics/prometheus-install/strimzi-pod-monitor.yaml) to enable prometheus scrapping on the targets. The topic (name: test) can be created with a CR like the [topic example](https://github.com/strimzi/strimzi-kafka-operator/blob/main/examples/topic/kafka-topic.yaml) just changing the name, or letting the brokers create it automatically.
 
-Remember to set up the [number of partitions](https://kafka.apache.org/documentation/#intro_concepts_and_terms) for the topic at least as a maximum of replicas of consumers. Otherwise, when scaling up and reaching the number of partitions, the consumers will be blocked without consuming new messages.
+Remember to set up the [number of partitions](https://kafka.apache.org/documentation/#intro_concepts_and_terms) for the topic at least as a maximum of replicas of consumers. Otherwise, when scaling up and reaching the number of partitions, the autoscaler will [limit the total lag to multiply the lagthreshold for number of partitions](https://github.com/kedacore/keda/blob/main/pkg/scalers/kafka_scaler.go#L609), and avoid consumers blocked without consuming new messages.
 
 ### Load generator: k6 producer
 
