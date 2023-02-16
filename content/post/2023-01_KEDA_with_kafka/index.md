@@ -109,6 +109,12 @@ This [link](code/camel-k/kafka-deterministic-consumer-kameletbinding.yaml) shows
 
 Although I am setting everything by my own, there is [an annotation](https://camel.apache.org/camel-k/1.11.x/kamelets/kamelets-user.html#kamelet-keda-user) to define a KameletBinding to automatically set up a KEDA autoscaler. That option can be explored in the future to simplify the set up.
 
+## ScaledObject
+
+That is the key for autoscaling with KEDA. It is based on triggers, in [this case](code/keda/kafka-consumer-scaledobject.yaml) kafka consumer lags. You can set up different triggers to autoscale, and it is not recommended to mix it with regular hpa.
+
+I recommend to look at the official docs of the scalers to find out all the alternatives and parameters that can be customized for a particular use case.
+
 ## Monitoring everything
 
 During the component definition, one of the main goals is to have the ability to monitor everything, from the load generator, the broker and consumers, but also what the autoscaler is reporting, so I can match up the source data with the actions taken, and tune all the parameters the better I am able to.
