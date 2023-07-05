@@ -47,10 +47,19 @@ markup:
       unsafe: true
       xHTML: true
   highlight:
+    anchorLineNos: false
     codeFences: true
+    guessSyntax: true
+    hl_Lines: ""
+    hl_inline: false
+    lineAnchors: ""
+    lineNoStart: 1
     lineNos: false
-    lineNumbersInTable: false
-    noClasses: false
+    lineNumbersInTable: true
+    noClasses: true
+    noHl: false
+    style: monokailight
+    tabWidth: 4
   tableOfContents:
     endLevel: 3
     ordered: false
