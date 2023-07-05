@@ -60,7 +60,7 @@ The example would be to create the artifacts for [cert-manager operator](https:/
 
 I have created the following structure:
 
-```
+```bash
 ├── hack
 ├── jsonnet
 │   └── vendor
@@ -117,7 +117,7 @@ At this moment, if I execute the first part of `hack/mixin.sh` from the root fol
 
 I have created the two jsonnet scripts that would create the kubernetes objects needed from the templates. The first one, [`main.jsonnet`](code/main.jsonnet) will handle PrometheusRules:
 
-```
+```go
 local certManagerMixin = (import 'gitlab.com/uneeq-oss/cert-manager-mixin/mixin.libsonnet');
 
 local alertingRules = if std.objectHasAll(certManagerMixin, 'prometheusAlerts') then certManagerMixin.prometheusAlerts.groups else [];
@@ -144,7 +144,7 @@ Very simple, I just select the `prometheusAlerts` leaf created with `mixin.libso
 
 Next one is [`dashboard.jsonnet`](code/dashboard.jsonnet):
 
-```
+```go
 local certManagerMixin = (import 'gitlab.com/´uneeq-oss/cert-manager-mixin/mixin.libsonnet');
 
 {
