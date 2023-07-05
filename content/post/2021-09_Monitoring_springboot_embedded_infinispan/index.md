@@ -11,6 +11,7 @@ tags: [
 categories: [
     "infinispan",
     "springboot",
+    "monitoring",
 ]
 ---
 
