@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug-direct
+  namespace: rhbk
+  labels:
+    app: debug-direct
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug-direct
+  template:
+    metadata:
+      labels:
+        app: debug-direct
+    spec:
+      containers:
+      - name: debug
+        image: quay.io/devfile/base-developer-image:ubi9-latest
+        env:
+          - name: VAULT_ADDR
+            value: http://vault.vault.svc.cluster.local:8200
+        command:
+          - bash
+          - -c 
+        args:
+          - |
+            export VAULT_TOKEN=$(curl -s --request POST --data '{"jwt": "'$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)'", "role": "keycloak-role"}' ${VAULT_ADDR}/v1/auth/kubernetes/login |jq -r ".auth.client_token")
+            curl -s --header "X-Vault-Token: ${VAULT_TOKEN}" http://vault.vault.svc.cluster.local:8200/v1/kv-v2/data/keycloak-postgresql/config > /tmp/keycloak-posgresql-vault
+            sleep infinity

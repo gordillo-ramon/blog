@@ -1,0 +1,42 @@
+apiVersion: stackgres.io/v1
+kind: SGCluster
+metadata:
+  name: keycloak-postgresql
+  namespace: rhbk
+spec:
+  configurations:
+    credentials:
+      patroni:
+        restApiPassword:
+          key: restapi-password
+          name: keycloak-postgresql-vault
+      users:
+        superuser:
+          username:
+            key: superuser-username
+            name: keycloak-postgresql-vault
+          password:
+            key: superuser-password
+            name: keycloak-postgresql-vault
+        replication:
+          username:
+            key: replication-username
+            name: keycloak-postgresql-vault
+          password:
+            key: replication-password
+            name: keycloak-postgresql-vault
+        authenticator:
+          username:
+            key: authenticator-username
+            name: keycloak-postgresql-vault
+          password:
+            key: authenticator-password
+            name: keycloak-postgresql-vault
+  instances: 2
+  postgres:
+    version: '15'
+  pods:
+    persistentVolume:
+      size: '5Gi'
+  prometheusAutobind: true
+

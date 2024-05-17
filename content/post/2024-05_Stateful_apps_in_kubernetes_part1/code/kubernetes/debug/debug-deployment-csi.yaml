@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug-csi
+  labels:
+    app: debug-csi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug-csi
+  template:
+    metadata:
+      labels:
+        app: debug-csi
+    spec:
+      containers:
+      - name: debug
+        image: registry.access.redhat.com/ubi9:latest
+        command:
+          - bash
+          - -c 
+        args:
+          - sleep infinity
+        volumeMounts:
+          - name: 'keycloak-postgresql-vault'
+            mountPath: '/mnt/secrets-store'
+            readOnly: true
+      volumes:
+        - name: keycloak-postgresql-vault
+          csi:
+            driver: 'secrets-store.csi.k8s.io'
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: 'keycloak-postgresql-vault'

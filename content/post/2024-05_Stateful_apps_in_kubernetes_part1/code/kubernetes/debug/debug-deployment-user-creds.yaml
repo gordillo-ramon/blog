@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug-user-creds
+  namespace: rhbk
+  labels:
+    app: debug-user-creds
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug-user-creds
+  template:
+    metadata:
+      labels:
+        app: debug-user-creds
+    spec:
+      containers:
+      - name: debug
+        image: registry.access.redhat.com/rhel9/postgresql-16
+        env:
+          - name: VAULT_ADDR
+            value: http://vault.vault.svc.cluster.local:8200
+        command:
+          - bash
+          - -c 
+        args:
+          - |
+            export VAULT_TOKEN=$(curl -s --request POST --data '{"jwt": "'$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)'", "role": "keycloak-role"}' ${VAULT_ADDR}/v1/auth/kubernetes/login | python3 -c "import sys,json; print(json.load(sys.stdin)['auth']['client_token'])")
+            curl -s --header "X-Vault-Token: ${VAULT_TOKEN}" http://vault.vault.svc.cluster.local:8200/v1/database/static-creds/app | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['password'])" > /tmp/password
+            sleep infinity

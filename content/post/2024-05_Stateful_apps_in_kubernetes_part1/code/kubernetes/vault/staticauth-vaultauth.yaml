@@ -1,0 +1,15 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: static-auth
+  namespace: rhbk
+spec:
+  kubernetes:
+    audiences:
+      - https://kubernetes.default.svc
+    role: keycloak-role
+    serviceAccount: default
+    tokenExpirationSeconds: 600
+  method: kubernetes
+  mount: kubernetes
+  vaultConnectionRef: openshift-operators/vaultconnection

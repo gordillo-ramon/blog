@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug-annotation
+  namespace: rhbk
+  labels:
+    app: debug-annotation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug-annotation
+  template:
+    metadata:
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/agent-inject-secret-keycloak-postgresql-vault: "kv-v2/data/keycloak-postgresql/config"
+        vault.hashicorp.com/agent-inject-default-template : json
+        vault.hashicorp.com/role: "keycloak-role"
+        vault.hashicorp.com/secret-volume-path: "/mnt/secrets-store"
+      labels:
+        app: debug-annotation
+    spec:
+      containers:
+      - name: debug
+        image: registry.access.redhat.com/ubi9:latest
+        command:
+          - bash
+          - -c 
+        args:
+          - sleep infinity

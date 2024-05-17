@@ -1,0 +1,18 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: keycloak-postgresql
+  namespace: rhbk
+spec:
+  destination:
+    create: true
+    name: keycloak-postgresql-vault
+    overwrite: false
+    transformation:
+      excludeRaw: true
+  hmacSecretData: true
+  mount: kv-v2
+  path: keycloak-postgresql/config
+  refreshAfter: 30s
+  type: kv-v2
+  vaultAuthRef: static-auth

@@ -1,0 +1,14 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
+kind: SecretProviderClass
+metadata:
+  name: keycloak-postgresql-vault
+  namespace: rhbk
+spec:
+  provider: vault
+  parameters:
+    roleName: keycloak-role
+    audience: https://kubernetes.default.svc
+    vaultAddress: 'http://vault.vault.svc.cluster.local:8200'
+    objects: |
+      - objectName: "keycloak-postgresql-vault"
+        secretPath: "kv-v2/data/keycloak-postgresql/config"
