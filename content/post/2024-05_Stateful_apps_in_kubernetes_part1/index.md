@@ -5,9 +5,8 @@ tags: [
     "Stateful",
     "Kubernetes",
     "Credentials",
-    "Certificates",
     "Vault",
-    "Stackgres",
+    "StackGres",
 ]
 categories: [
     "security",
@@ -67,7 +66,7 @@ For a simple setup, I am using an OpenShift cluster (4.15 at moment of writing) 
 
 For Credential Management, I have selected for my example Hashicorp Vault. To install it, we can follow the [quick start](https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-openshift). Or just use the [script](code/vault/setup.sh) that I just linked.
 
-I am using a postgresql database for the example. As I want this database to provide some extra capabilities, I am using one project that provides operator-based management in kubernetes, [stackgres](https://stackgres.io/). I can use it from the operator hub or just deploy it using its helm chart. I will set up a database called `keycloak-postgresql` for my future application.
+I am using a postgresql database for the example. As I want this database to provide some extra capabilities, I am using one project that provides operator-based management in kubernetes, [StackGres](https://stackgres.io/). I can use it from the operator hub or just deploy it using its helm chart. I will set up a database called `keycloak-postgresql` for my future application.
 
 ### Vault - Secret Synchronization
 
@@ -81,7 +80,7 @@ Finally, we have to create the objects to tell the operator to link the kubernet
 
 ![Screenshot Secret Synced](images/screenshots/secret-sync.png)
 
-Now it is time to deploy the database. As previously, we create the [stackgresql subscription](code/kubernetes/stackgres/stackgres-subscription.yaml).
+Now it is time to deploy the database. As previously, we create the [StackGres subscription](code/kubernetes/stackgres/stackgres-subscription.yaml).
 
 Then, create the cluster. We have tons of options to customize, but I would create a [simple one](code/kubernetes/stackgres/keycloak-postgresql-sgcluster.yaml) and stick to a secret reference to the one synced from the vault.
 
