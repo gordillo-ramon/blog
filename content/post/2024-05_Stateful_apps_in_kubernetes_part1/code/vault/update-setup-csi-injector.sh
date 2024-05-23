@@ -1,6 +1,3 @@
-# CSI needs privileged SCC serviceaccount
-oc adm policy add-scc-to-user privileged -z vault-csi-provider -n vault
-
 helm upgrade vault hashicorp/vault -n vault -f - << _EOF_
 
 global:
@@ -26,6 +23,6 @@ server:
       termination: edge
 
 injector:
- enabled: false 
+ enabled: true
 
 _EOF_

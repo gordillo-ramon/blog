@@ -132,7 +132,7 @@ Doing a sample `kubectl exec $POD -- cat /mnt/secrets-store/keycloak-postgresql-
 
 The sidecar injection use to be a metadata annotation that instructs a mutating webhook (in case of hashicorp vault, the agent injector) to add a sidecar container that connects to the vault and download the secret in a shared space between the sidecar and the application container.
 
-It is the same approach as other technologies like istio add a companion container to abstract the application of the underlying technology to get the secret.
+It is the same approach as other technologies like istio add a companion container to abstract the application of the underlying technology to get the secret. Again, we need to update the vault deployment with [this script](code/vault/update-setup-csi-injector.sh)
 
 The list of annotations relevant for the injector are detailed [here](https://developer.hashicorp.com/vault/docs/platform/k8s/injector/annotations).
 

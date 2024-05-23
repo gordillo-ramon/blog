@@ -26,6 +26,6 @@ server:
       termination: edge
 
 injector:
-  enabled: true
+  enabled: false
 
 _EOF_

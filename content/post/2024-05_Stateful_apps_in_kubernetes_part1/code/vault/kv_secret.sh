@@ -24,10 +24,10 @@ path "kv-v2/data/keycloak-postgresql/config" {
 
 # Add the role for a rhbk serviceaccount to get the credentials
 vault write auth/kubernetes/role/keycloak-role \
-   bound_service_account_names=default \
+   bound_service_account_names=default,keycloak-postgresql-patroni \
    bound_service_account_namespaces=rhbk \
    policies=keycloak-postgresql-policy \
-   audience=vault \
+   audience=https://kubernetes.default.svc \
    ttl=24h
 # ----------------------------------------------
 _EOF_
