@@ -30,7 +30,7 @@ There are two common service types:
 
 # OpenShift, OVN and DNS implementation
 
-In OpenShift, CoreDNS instances run as multiple replicas behind a single, fixed service IP (usually `172.30.0.10`), which is automatically injected into pods’ `/etc/resolv.conf`. Although this service uses round-robin load balancing, it can be more efficient if a DNS query goes to a local DNS server. To achieve this, Red Hat engineers implemented a [custom OVN rule in the OVN-Kubernetes plugin]((https://github.com/openshift/ovn-kubernetes/blob/release-4.18/go-controller/pkg/ovn/controller/services/lb_config.go#L251-L253)) that redirects DNS queries to a local instance when possible.
+In OpenShift, CoreDNS instances run as multiple replicas behind a single, fixed service IP (usually `172.30.0.10`), which is automatically injected into pods’ `/etc/resolv.conf`. Although this service uses round-robin load balancing, it can be more efficient if a DNS query goes to a local DNS server. To achieve this, Red Hat engineers implemented a [custom OVN rule in the OVN-Kubernetes plugin](https://github.com/openshift/ovn-kubernetes/blob/release-4.18/go-controller/pkg/ovn/controller/services/lb_config.go#L251-L253) that redirects DNS queries to a local instance when possible.
 
 I deployed my grafana dashboard in my 6 node OpenShift cluster, and deployed a springboot application stick to a node (with nodeselector) to do some quick tests and double check the node DNS request stickiness.
 
