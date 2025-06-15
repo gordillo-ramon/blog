@@ -55,11 +55,11 @@ instructs the resolver to try appending these suffixes to unqualified names. Whe
 
 The `ndots` option determines whether the resolver should treat the name as fully qualified. In OpenShift, the default is typically 5. Since `my-service.namespace.svc.cluster.local` contains 4 dots, it will go through the search list. Adding a trailing dot (e.g., `my-service.namespace.svc.cluster.local.`) tells the resolver to use the name as is.
 
-When looking at the metrics of query results, we can see lots of NOERROR responses.
+When looking at the metrics of query results, we can see lots of NXDOMAIN responses.
 
-![DNS results](images/noerror.png). 
+![DNS results](images/nxdomain.png). 
 
-- When querying a fully qualified name like `my-service.namespace.svc.cluster.local`, the search configuration causes the resolver to append additional, non-existent suffixes. For example, it might eventually try `my-service.namespace.svc.cluster.local.namespace.svc.cluster.local` and similar combinations, each returning a NOERROR (meaning “name not found”) response.
+- When querying a fully qualified name like `my-service.namespace.svc.cluster.local`, the search configuration causes the resolver to append additional, non-existent suffixes. For example, it might eventually try `my-service.namespace.svc.cluster.local.namespace.svc.cluster.local` and similar combinations, each returning a NXDOMAIN (meaning “Domain does not exist”) response.
 - Using a trailing dot or modifying the `ndots` setting can prevent these redundant lookups.
 
 # Multiple A/AAAA Record Requests
