@@ -94,7 +94,7 @@ tail -4 /etc/named/ipa-ext.conf > /tmp/update.key
 export NSUPDATE_KEY=/tmp/update.key
 ```
 
-Complete the `NSUPDATE_SERVER` with the ip of ipa server and the `ACME_SERVER` with `https://<ipa-server>:8443/acme/directory`
+Complete the `NSUPDATE_SERVER` with the ip of ipa server and the `ACME_DIRECTORY` with `https://<ipa-server>:8443/acme/directory`
 
 Then a new account should be created with the :
 
