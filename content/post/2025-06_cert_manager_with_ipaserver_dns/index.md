@@ -75,7 +75,7 @@ Now, the update policy for the zone has to be updated, but for using ipa command
 
 ```bash
 echo <admin_pass> | kinit admin
-export DNSZONE_UPDATE_POLICY=$(ipa dnszone-show <mydomain.com> --all | awk '/BIND update policy:/ { $1=""; print substr($0,2) }')
+export DNSZONE_UPDATE_POLICY=$(ipa dnszone-show <mydomain.com> --all | grep "BIND update policy" | sed 's/.*BIND update policy: //')
 ipa dnszone-mod <mydomain.com> --update-policy="${DNSZONE_UPDATE_POLICY}; grant update subdomain <mydomain.com>.;"
 ```
 
