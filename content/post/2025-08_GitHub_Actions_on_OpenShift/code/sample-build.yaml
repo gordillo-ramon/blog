@@ -1,0 +1,35 @@
+name: Build Image using Containerfile
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - examples/buildah/**
+      - .github/workflows/sample.build.yaml
+  
+jobs:
+  build:
+    name: Build image
+    runs-on: arc-openshift-runner-set
+    env:
+      IMAGE_NAME: quay.io/rgordill/sample-build
+      IMAGE_TAG: "0.1"
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Buildah Action
+      id: build_image
+      uses: redhat-actions/buildah-build@v2
+      with:
+        context: examples/buildah
+        image: ${{ env.IMAGE_NAME }}
+        tags: latest ${{ env.IMAGE_TAG }}
+        containerfiles: |
+          examples/buildah/ubi10.Containerfile
+
+    - name: Echo Outputs
+      run: |
+        echo "Image: ${{ steps.build_image.outputs.image }}"
+        echo "Tags: ${{ steps.build_image.outputs.tags }}"
+        echo "Tagged Image: ${{ steps.build_image.outputs.image-with-tag }}"
