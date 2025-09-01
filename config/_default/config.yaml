@@ -4,7 +4,6 @@ enableRobotsTXT: true
 enableEmoji: true
 theme: jane
 hasCJKLanguage: true
-paginate: 3
 disableKinds: 
 - "RSS"
 disqusShortname: ''
@@ -14,8 +13,9 @@ defaultContentLanguage: en
 languages:
   en:
     languageCode: en
-author:
-  name: rgordill
+params:
+  author: 
+    name: Ramon Gordillo
 permalinks:
   post: /:year/:month/:title/
 sitemap:
